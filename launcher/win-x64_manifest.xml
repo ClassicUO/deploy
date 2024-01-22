@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<releases>
+	<release name="ClassicUOLauncher-win-x64-release.zip" version="release">
+		<files>
+			<file filename="ClassicUOLauncher.exe" hash="457f6231dfc35df0e36a4375ae78a695" />
+		</files>
+	</release>
+</releases>
