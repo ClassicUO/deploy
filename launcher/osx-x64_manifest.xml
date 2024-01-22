@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <releases>
-	<release name="ClassicUOLauncher-osx-x64-release.zip" version="release">
+	<release name="ClassicUOLauncher-osx-x64-release.zip" version="Release">
 		<files>
 			<file filename="ClassicUOLauncher.app/Contents/Info.plist" hash="6407330bba68a0bf37fd54a799ad1e7a" />
-			<file filename="ClassicUOLauncher.app/Contents/MacOS/ClassicUOLauncher" hash="e1c1804916485abd482c2cbf5b10e10a" />
+			<file filename="ClassicUOLauncher.app/Contents/MacOS/ClassicUOLauncher" hash="a2db9f884bec3e8c880d9bcf88cb88ef" />
 			<file filename="ClassicUOLauncher.app/Contents/Resources/cuologo_launcher.png" hash="6b87db87307c5629c01227fec08ebd07" />
 		</files>
 	</release>
