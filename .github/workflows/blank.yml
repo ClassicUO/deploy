@@ -18,11 +18,11 @@ jobs:
       - name: Create package
         run: |
           mkdir upload
-          cd ./launcher/win-x64/ && zip -r ./upload/ClassicUOLauncher-win-x64-release.zip .
+          cd ./launcher/win-x64/ && zip -r ../../upload/ClassicUOLauncher-win-x64-release.zip .
           cd ../..
-          cd ./launcher/linux-x64/ && zip -r ./upload/ClassicUOLauncher-linux-x64-release.zip .
+          cd ./launcher/linux-x64/ && zip -r ../../upload/ClassicUOLauncher-linux-x64-release.zip .
           cd ../..
-          cd ./launcher/osx-x64/ && zip -r ./upload/ClassicUOLauncher-osx-x64-release.zip .
+          cd ./launcher/osx-x64/ && zip -r ../../upload/ClassicUOLauncher-osx-x64-release.zip .
           cd ../..
 
       - name: Upload Release
