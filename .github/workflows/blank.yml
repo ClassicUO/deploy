@@ -25,7 +25,7 @@ jobs:
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "/upload/ClassicUOLauncher-win-x64-release.zip,/upload/ClassicUOLauncher-linux-x64-release.zip,/upload/ClassicUOLauncher-osx-x64-release.zip"
+          artifacts: "./upload/ClassicUOLauncher-win-x64-release.zip,./upload/ClassicUOLauncher-linux-x64-release.zip,./upload/ClassicUOLauncher-osx-x64-release.zip"
           name: "ClassicUOLauncher Release"
           draft: false
           prerelease: false
