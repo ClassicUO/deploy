@@ -18,9 +18,12 @@ jobs:
       - name: Create package
         run: |
           mkdir upload
-          zip -r -j ./upload/ClassicUOLauncher-win-x64-release.zip ./launcher/win-x64/*
-          zip -r -j ./upload/ClassicUOLauncher-linux-x64-release.zip ./launcher/linux-x64/* 
-          zip -r -j ./upload/ClassicUOLauncher-osx-x64-release.zip ./launcher/osx-x64/*
+          cd /launcher/win-x64/ && zip -r ./upload/ClassicUOLauncher-win-x64-release.zip .
+          cd ../..
+          cd /launcher/linux-x64/ && zip -r ./upload/ClassicUOLauncher-linux-x64-release.zip .
+          cd ../..
+          cd /launcher/osx-x64/ && zip -r ./upload/ClassicUOLauncher-osx-x64-release.zip .
+          cd ../..
 
       - name: Upload Release
         uses: ncipollo/release-action@v1
