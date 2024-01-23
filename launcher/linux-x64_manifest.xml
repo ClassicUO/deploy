@@ -2,7 +2,7 @@
 <releases>
 	<release name="ClassicUOLauncher-linux-x64-release.zip" version="Release">
 		<files>
-			<file filename="ClassicUOLauncher" hash="a1a96776d0f841ce33e7e0b175376018" />
+			<file filename="ClassicUOLauncher" hash="d91c6c1947a149ccc58f05e509c0ae55" />
 		</files>
 	</release>
 </releases>
