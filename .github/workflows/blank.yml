@@ -19,7 +19,7 @@ jobs:
       - name: Set file permissions
         run: |
           chmod +x ./launcher/linux-x64/ClassicUOLauncher
-          chmod +x ./launcher/osx-x64/ClassicUOLauncher
+          chmod +x ./launcher/osx-x64/ClassicUOLauncher.app/Contents/MacOS/ClassicUOLauncher
           
       - name: Create package
         run: |
