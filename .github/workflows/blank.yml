@@ -7,8 +7,9 @@ on:
       - 'launcher/**'
 
   workflow_dispatch:
+
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,25 +17,73 @@ jobs:
 
       - name: Install Zip
         run: sudo apt-get install -y zip
-      - name: Set file permissions
+
+      - name: Set file permissions for Linux
+        run: chmod +x ./launcher/linux-x64/ClassicUOLauncher
+
+      - name: Create package for Linux
         run: |
-          chmod +x ./launcher/linux-x64/ClassicUOLauncher
-          chmod +x ./launcher/osx-x64/ClassicUOLauncher.app/Contents/MacOS/ClassicUOLauncher
-          
-      - name: Create package
+          mkdir upload
+          cd ./launcher/linux-x64/ && zip -r ../../upload/ClassicUOLauncher-linux-x64-release.zip . -x .keep
+          cd ../..
+
+      - name: Upload Release for Linux
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./upload/ClassicUOLauncher-linux-x64-release.zip"
+          name: "ClassicUOLauncher Release"
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          tag: "launcher-release"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set file permissions for MacOS
+        run: chmod +x ./launcher/osx-x64/ClassicUOLauncher.app/Contents/MacOS/ClassicUOLauncher
+
+      - name: Create package for MacOS
+        run: |
+          mkdir upload
+          cd ./launcher/osx-x64/ && zip -r ../../upload/ClassicUOLauncher-osx-x64-release.zip . -x .keep
+          cd ../..
+
+      - name: Upload Release for MacOS
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./upload/ClassicUOLauncher-osx-x64-release.zip"
+          name: "ClassicUOLauncher Release"
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          tag: "launcher-release"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set file permissions for Windows
+        run: |
+          # Add your Windows-specific file permission commands here
+
+      - name: Create package for Windows
         run: |
           mkdir upload
           cd ./launcher/win-x64/ && zip -r ../../upload/ClassicUOLauncher-win-x64-release.zip . -x .keep
           cd ../..
-          cd ./launcher/linux-x64/ && zip -r ../../upload/ClassicUOLauncher-linux-x64-release.zip . -x .keep
-          cd ../..
-          cd ./launcher/osx-x64/ && zip -r ../../upload/ClassicUOLauncher-osx-x64-release.zip . -x .keep
-          cd ../..
 
-      - name: Upload Release
+      - name: Upload Release for Windows
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "./upload/ClassicUOLauncher-win-x64-release.zip,./upload/ClassicUOLauncher-linux-x64-release.zip,./upload/ClassicUOLauncher-osx-x64-release.zip"
+          artifacts: "./upload/ClassicUOLauncher-win-x64-release.zip"
           name: "ClassicUOLauncher Release"
           draft: false
           prerelease: false
