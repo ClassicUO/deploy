@@ -1,0 +1,17 @@
+name: launcher-pack-release
+
+on:
+    push:
+        branches: ["main"]
+        paths:
+            - "launcher/**"
+
+    workflow_dispatch:
+
+jobs:
+    build-linux:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+# TODO
