@@ -1,4 +1,4 @@
-name: launcher-pack-release
+name: client-pack-release
 
 on:
     push:
