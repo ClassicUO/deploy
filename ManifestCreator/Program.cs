@@ -11,7 +11,8 @@ using var md5 = MD5.Create();
 var options = ParseArgs(args);
 var manifestPath = $"../client/{options.Target}_manifest.xml";
 
-if (!File.Exists(manifestPath)) throw new FileNotFoundException($"manifest '{manifestPath}' not found!");
+if (!File.Exists(manifestPath))
+    Console.WriteLine("manifest '{0}' not found!", manifestPath);
 
 var releasesList = ReadManifest(manifestPath);
 if (releasesList.Any(s => s.Version.Equals(options.Version)))
@@ -20,16 +21,18 @@ if (releasesList.Any(s => s.Version.Equals(options.Version)))
     return;
 }
 
-var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
-var osTarget = manifestPath.Replace("_manifest.xml", "");
+var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, options.IsLatest);
 
-var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, true);
+if (currentRelease.IsLatest)
+    releasesList.ForEach(s => s.IsLatest = false);
+else if (releasesList.Count <= 0)
+    currentRelease.IsLatest = true;
 
-releasesList.ForEach(s => s.IsLatest = false);
 releasesList.Add(currentRelease);
 
-UpdateDiffFolders(currentRelease, deployFolder, osTarget, options.CuoBinPath);
-WriteManifest("./manifest.xml", releasesList);
+var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
+UpdateDiffFolders(currentRelease, deployFolder, options.CuoBinPath);
+WriteManifest(Path.Combine(options.ManifestOutput, $"{options.Target}_manifest.xml"), releasesList);
 
 Console.WriteLine("Manifest created!");
 
@@ -83,9 +86,12 @@ ManifestRelease CreateReleaseFromFolder(DirectoryInfo cuoOutputPath, string vers
             path = path.Remove(0, 1);
         }
 
+        path = path.Replace('\\', '/');
+
         var hash = CalculateMD5(f.FullName);
-        var hashFile = new HashFile(path, hash, $"{hash[^2..]}/{f.FullName}_{hash}");
+        var hashFile = new HashFile(path, hash, $"{HashFolder(hash)}/{f.FullName}_{hash}");
         fileList.Add(hashFile);
+
         Console.WriteLine(hashFile);
     }
 
@@ -97,6 +103,10 @@ ManifestRelease CreateReleaseFromFolder(DirectoryInfo cuoOutputPath, string vers
 void WriteManifest(string manifestName, List<ManifestRelease> releases)
 {
     Console.WriteLine("saving manifest {0}", manifestName);
+
+    var fileInfo = new FileInfo(manifestName);
+    if (fileInfo.Directory != null && !fileInfo.Directory.Exists)
+        fileInfo.Directory.Create();
 
     var fs = File.CreateText(manifestName);
     using var xml = new XmlTextWriter(fs.BaseStream, Encoding.UTF8)
@@ -124,17 +134,19 @@ string CalculateMD5(string filename)
     return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
 }
 
-void UpdateDiffFolders(ManifestRelease release, DirectoryInfo deployFolder, string osVersion, DirectoryInfo cuoBinPath)
+void UpdateDiffFolders(ManifestRelease release, DirectoryInfo deployFolder, DirectoryInfo cuoBinPath)
 {
-    //var releaseFolder = cuoBinPath ?? new DirectoryInfo(Path.Combine(deployFolder.FullName, osVersion));
+    Console.WriteLine("updating diff paths");
+
     var diffFolder = new DirectoryInfo(Path.Combine(deployFolder.FullName, "diff"));
 
     foreach (var file in release.Files.Where(s => !string.IsNullOrWhiteSpace(s.Hash)))
     {
-        var dFolder = Directory.CreateDirectory(Path.Combine(diffFolder.FullName, file.Hash[^2..]));
-        var dFilePath = new FileInfo(Path.Combine(dFolder.FullName, file.Filename));
+        var dFolder = Directory.CreateDirectory(Path.Combine(diffFolder.FullName, HashFolder(file.Hash)));
+        var hashedFilePath = file.Filename + "_" + file.Hash;
+        var dFilePath = new FileInfo(Path.Combine(dFolder.FullName, hashedFilePath));
 
-        Console.WriteLine("folder name {0} {1}", Path.Combine(dFolder.Name, file.Filename), file.Hash);
+        Console.WriteLine("hashed file path: {0}", Path.Combine(dFolder.Name, hashedFilePath));
 
         if (!dFilePath.Exists)
         {
@@ -155,13 +167,18 @@ void UpdateDiffFolders(ManifestRelease release, DirectoryInfo deployFolder, stri
                 continue;
             }
 
-            File.Copy(srcFile.FullName, dFilePath.FullName + "_" + file.Hash, true);
+            Console.WriteLine("copying {0}", dFilePath.FullName);
+
+            File.Copy(srcFile.FullName, dFilePath.FullName, true);
         }
 
-        file.Url = Path.Combine(dFolder.Name, file.Filename + "_" + file.Hash)
-            .Replace('\\', '/');
+        file.Url = Path.Combine(dFolder.Name, hashedFilePath).Replace('\\', '/');
     }
+
+    Console.WriteLine("done");
 }
+
+string HashFolder(string hash) => hash[^2..];
 
 Options ParseArgs(string[] args)
 {
@@ -169,6 +186,8 @@ Options ParseArgs(string[] args)
     var version = string.Empty;
     var name = string.Empty;
     var target = string.Empty;
+    var latest = true;
+    var output = "./";
 
     for (int i = 0; i < args.Length; ++i)
     {
@@ -194,10 +213,18 @@ Options ParseArgs(string[] args)
             case "target":
                 target = args[i + 1];
                 break;
+
+            case "latest":
+                latest = bool.Parse(args[i + 1]);
+                break;
+
+            case "output":
+                output = args[i + 1];
+                break;
         }
     }
 
-    return new Options(new DirectoryInfo(cuoPath), version, name, target);
+    return new Options(new DirectoryInfo(cuoPath), version.Trim(), name.Trim(), target.Trim(), latest, output);
 }
 
 sealed record Options
@@ -205,7 +232,9 @@ sealed record Options
     DirectoryInfo CuoBinPath,
     string Version,
     string Name,
-    string Target
+    string Target,
+    bool IsLatest,
+    string ManifestOutput
 );
 
 sealed class HashFile
@@ -224,7 +253,7 @@ sealed class HashFile
     public void Save(XmlWriter xml)
     {
         xml.WriteStartElement("file");
-        xml.WriteAttributeString("filename", Filename);
+        xml.WriteAttributeString("filename", Filename.Replace('\\', '/'));
         xml.WriteAttributeString("hash", Hash);
         xml.WriteAttributeString("url", Url);
         xml.WriteEndElement();
@@ -258,12 +287,11 @@ sealed class ManifestRelease
         Version = xml.GetAttribute("version");
         bool.TryParse(xml.GetAttribute("latest"), out var res);
         IsLatest = res;
-        Files ??= new List<HashFile>();
 
-        foreach (XmlElement element in xml["files"].GetElementsByTagName("file"))
-            Files.Add(new HashFile(element.GetAttribute("filename"), element.GetAttribute("hash"), element.GetAttribute("url")));
-
-        Files.Sort((a, b) => a.Filename.CompareTo(b.Filename));
+        Files = xml["files"].GetElementsByTagName("file").OfType<XmlElement>()
+            .Select(s => new HashFile(s.GetAttribute("filename").Replace('\\', '/'), s.GetAttribute("hash"), s.GetAttribute("url")))
+            .OrderBy(s => s.Filename)
+            .ToList();
     }
 
     public void Save(XmlWriter xml)
@@ -274,10 +302,7 @@ sealed class ManifestRelease
         xml.WriteAttributeString("latest", IsLatest.ToString());
 
         xml.WriteStartElement("files");
-        foreach (var file in Files)
-        {
-            file.Save(xml);
-        }
+        Files.ForEach(s => s.Save(xml));
         xml.WriteEndElement();
 
         xml.WriteEndElement();
