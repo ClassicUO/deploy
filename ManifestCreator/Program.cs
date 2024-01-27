@@ -8,36 +8,27 @@ using System.Xml;
 
 using var md5 = MD5.Create();
 
+var options = ParseArgs(args);
+var manifestPath = $"../client/{options.Target}_manifest.xml";
 
-var cuoBinPath = new DirectoryInfo(Path.GetFullPath(args[0]));
-Console.WriteLine("CUOPATH: {0}", cuoBinPath);
-
-var releaseVersion = args[1];
-Console.WriteLine("VERSION: {0}", releaseVersion);
-
-var releaseName = args[2];
-Console.WriteLine("NAME: {0}", releaseName);
-
-var manifestPath = args.Length >= 4 ? args[3] : "";
-Console.WriteLine("OLD MANIFEST: {0}", manifestPath);
-
+if (!File.Exists(manifestPath)) throw new FileNotFoundException($"manifest '{manifestPath}' not found!");
 
 var releasesList = ReadManifest(manifestPath);
-if (releasesList.Any(s => s.Version.Equals(releaseVersion)))
+if (releasesList.Any(s => s.Version.Equals(options.Version)))
 {
-    Console.WriteLine("a release with version '{0}' already exists!", releaseVersion);
+    Console.WriteLine("a release with version '{0}' already exists!", options.Version);
     return;
 }
 
 var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
 var osTarget = manifestPath.Replace("_manifest.xml", "");
 
-var currentRelease = CreateReleaseFromFolder(cuoBinPath, releaseVersion, releaseName, true);
+var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, true);
 
 releasesList.ForEach(s => s.IsLatest = false);
 releasesList.Add(currentRelease);
 
-UpdateDiffFolders(currentRelease, deployFolder, osTarget, cuoBinPath);
+UpdateDiffFolders(currentRelease, deployFolder, osTarget, options.CuoBinPath);
 WriteManifest("./manifest.xml", releasesList);
 
 Console.WriteLine("Manifest created!");
@@ -171,6 +162,51 @@ void UpdateDiffFolders(ManifestRelease release, DirectoryInfo deployFolder, stri
             .Replace('\\', '/');
     }
 }
+
+Options ParseArgs(string[] args)
+{
+    var cuoPath = string.Empty;
+    var version = string.Empty;
+    var name = string.Empty;
+    var target = string.Empty;
+
+    for (int i = 0; i < args.Length; ++i)
+    {
+        var cmd = args[i];
+
+        if (!cmd.StartsWith("--"))
+            continue;
+
+        switch (cmd[2..])
+        {
+            case "bin":
+                cuoPath = args[i + 1];
+                break;
+
+            case "version":
+                version = args[i + 1];
+                break;
+
+            case "name":
+                name = args[i + 1];
+                break;
+
+            case "target":
+                target = args[i + 1];
+                break;
+        }
+    }
+
+    return new Options(new DirectoryInfo(cuoPath), version, name, target);
+}
+
+sealed record Options
+(
+    DirectoryInfo CuoBinPath,
+    string Version,
+    string Name,
+    string Target
+);
 
 sealed class HashFile
 {
