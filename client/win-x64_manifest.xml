@@ -11,7 +11,7 @@
 			<file filename="ClassicUO.bin.x86_64" hash="335031523cc4b296287afdc4b54d81ce" url="ce/ClassicUO.bin.x86_64_335031523cc4b296287afdc4b54d81ce" />
 			<file filename="ClassicUO.bin.x86_64.debug" hash="e4f288b5de6f6893a08817c95604a6af" url="af/ClassicUO.bin.x86_64.debug_e4f288b5de6f6893a08817c95604a6af" />
 			<file filename="ClassicUO.exe" hash="84c3d838b40c7741116bf93871b96be2" url="e2/ClassicUO.exe_84c3d838b40c7741116bf93871b96be2" />
-			<!--<file filename="ClassicUO.exe.config" hash="eea6aa9b618383bcc985b659393114f4" url="f4/ClassicUO.exe.config_eea6aa9b618383bcc985b659393114f4" /> -->
+			<file filename="ClassicUO.exe.config" hash="eea6aa9b618383bcc985b659393114f4" url="f4/ClassicUO.exe.config_eea6aa9b618383bcc985b659393114f4" />
 			<file filename="ClassicUO.IO.dll" hash="fec72334fecda50bdc41fe1671996be7" url="e7/ClassicUO.IO.dll_fec72334fecda50bdc41fe1671996be7" />
 			<file filename="ClassicUO.IO.dll.config" hash="29ece8eae87a599cfcc44b40663140ac" url="ac/ClassicUO.IO.dll.config_29ece8eae87a599cfcc44b40663140ac" />
 			<file filename="ClassicUO.IO.pdb" hash="8f7ba15b35a4eade363703e41a430df1" url="f1/ClassicUO.IO.pdb_8f7ba15b35a4eade363703e41a430df1" />
