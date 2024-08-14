@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <releases>
-	<release name="ClassicUO .NET472 EOL" version="1.0.0.0" latest="True">
+	<release name="ClassicUO .NET472 EOL" version="1.0.0.0" latest="False">
 		<files>
 			<file filename="Accessibility.dll" hash="6461bbbe70187b59bcde8c9c78001aa8" url="a8/Accessibility.dll_6461bbbe70187b59bcde8c9c78001aa8" />
 			<file filename="ClassicUO" hash="f32805e2bad19ad28544c9bebd4ede31" url="31/ClassicUO_f32805e2bad19ad28544c9bebd4ede31" />
@@ -73,6 +73,32 @@
 			<file filename="x64/SDL2.dll" hash="9d3b8235c39c9caf378e605fe5b6b7f8" url="f8/x64/SDL2.dll_9d3b8235c39c9caf378e605fe5b6b7f8" />
 			<file filename="x64/vcruntime140.dll" hash="971dbbe854fc6ab78c095607dfad7b5c" url="5c/x64/vcruntime140.dll_971dbbe854fc6ab78c095607dfad7b5c" />
 			<file filename="x64/zlib.dll" hash="12180b59e1828516e42f801d25e48968" url="68/x64/zlib.dll_12180b59e1828516e42f801d25e48968" />
+		</files>
+	</release>
+	<release name="ClassicUO 1.1.0.0" version="1.1.0.0" latest="True">
+		<files>
+			<file filename="ClassicUO.Assets.pdb" hash="74d0090506ae8bcd4a3751899458e8c1" url="c1/ClassicUO.Assets.pdb_74d0090506ae8bcd4a3751899458e8c1" />
+			<file filename="ClassicUO.exe" hash="0af8d010a9f6121d92d45e64a2ae86d5" url="d5/ClassicUO.exe_0af8d010a9f6121d92d45e64a2ae86d5" />
+			<file filename="ClassicUO.exe.config" hash="85a933acdcbe62992f8c0032a3d3d2ce" url="ce/ClassicUO.exe.config_85a933acdcbe62992f8c0032a3d3d2ce" />
+			<file filename="ClassicUO.IO.pdb" hash="1e673eb0e644b2edf5eac6228e85b358" url="58/ClassicUO.IO.pdb_1e673eb0e644b2edf5eac6228e85b358" />
+			<file filename="ClassicUO.pdb" hash="96395265278ac489e5cefdfe5a79f12b" url="2b/ClassicUO.pdb_96395265278ac489e5cefdfe5a79f12b" />
+			<file filename="ClassicUO.Renderer.pdb" hash="ba565a29af90c1657722df78d3243bf4" url="f4/ClassicUO.Renderer.pdb_ba565a29af90c1657722df78d3243bf4" />
+			<file filename="ClassicUO.Utility.pdb" hash="bb6e151330e03c7ece55c8e7829cf64c" url="4c/ClassicUO.Utility.pdb_bb6e151330e03c7ece55c8e7829cf64c" />
+			<file filename="cuo.dll" hash="fd29b8eb30331081077c0dc7cfc56a44" url="44/cuo.dll_fd29b8eb30331081077c0dc7cfc56a44" />
+			<file filename="cuo.pdb" hash="46c2a90d088c1c5947c2a2b418f274fa" url="fa/cuo.pdb_46c2a90d088c1c5947c2a2b418f274fa" />
+			<file filename="cuoapi.dll" hash="2fbd9d072eefed8adc2f24e89ff71929" url="29/cuoapi.dll_2fbd9d072eefed8adc2f24e89ff71929" />
+			<file filename="FAudio.dll" hash="0a5cd85bdad3020be99e08159ab7e004" url="04/FAudio.dll_0a5cd85bdad3020be99e08159ab7e004" />
+			<file filename="FNA.dll.config" hash="1e8e97134939d99c1b1a77c5df00ff9a" url="9a/FNA.dll.config_1e8e97134939d99c1b1a77c5df00ff9a" />
+			<file filename="FNA.pdb" hash="9b3a52ddfdf1df1c9f2b3f8ea7e604ee" url="ee/FNA.pdb_9b3a52ddfdf1df1c9f2b3f8ea7e604ee" />
+			<file filename="FNA3D.dll" hash="2d474cfb5c4986c21a7e936e32d93785" url="85/FNA3D.dll_2d474cfb5c4986c21a7e936e32d93785" />
+			<file filename="libtheorafile.dll" hash="cccea85333388bc65916f620a4097c6b" url="6b/libtheorafile.dll_cccea85333388bc65916f620a4097c6b" />
+			<file filename="MP3Sharp.pdb" hash="e3e0f462639eca964dd56ce549b05840" url="40/MP3Sharp.pdb_e3e0f462639eca964dd56ce549b05840" />
+			<file filename="SDL2.dll" hash="1b4ba5bd06f14635d1de6d994b4be8fb" url="fb/SDL2.dll_1b4ba5bd06f14635d1de6d994b4be8fb" />
+			<file filename="System.Buffers.dll" hash="ecdfe8ede869d2ccc6bf99981ea96400" url="00/System.Buffers.dll_ecdfe8ede869d2ccc6bf99981ea96400" />
+			<file filename="System.Memory.dll" hash="f09441a1ee47fb3e6571a3a448e05baf" url="af/System.Memory.dll_f09441a1ee47fb3e6571a3a448e05baf" />
+			<file filename="System.Numerics.Vectors.dll" hash="aaa2cbf14e06e9d3586d8a4ed455db33" url="33/System.Numerics.Vectors.dll_aaa2cbf14e06e9d3586d8a4ed455db33" />
+			<file filename="System.Runtime.CompilerServices.Unsafe.dll" hash="c610e828b54001574d86dd2ed730e392" url="92/System.Runtime.CompilerServices.Unsafe.dll_c610e828b54001574d86dd2ed730e392" />
+			<file filename="zlib.dll" hash="12180b59e1828516e42f801d25e48968" url="68/zlib.dll_12180b59e1828516e42f801d25e48968" />
 		</files>
 	</release>
 </releases>
