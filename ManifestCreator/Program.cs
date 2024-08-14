@@ -239,23 +239,34 @@ sealed record Options
 
 sealed class HashFile
 {
-    public HashFile(string fileName, string hash, string url)
+    public HashFile(string fileName, string hash, string url, UpdateAction action = UpdateAction.None)
     {
         Filename = fileName;
         Hash = hash;
         Url = url;
+        Action = action;
     }
 
     public string Filename { get; }
     public string Url { get; set; }
     public string Hash { get; }
+    public UpdateAction Action { get; }
 
     public void Save(XmlWriter xml)
     {
         xml.WriteStartElement("file");
         xml.WriteAttributeString("filename", Filename.Replace('\\', '/'));
-        xml.WriteAttributeString("hash", Hash);
-        xml.WriteAttributeString("url", Url);
+
+        if (Action == UpdateAction.Delete)
+        {
+            xml.WriteAttributeString("action", "del");
+        }
+        else
+        {
+            xml.WriteAttributeString("hash", Hash);
+            xml.WriteAttributeString("url", Url);
+        }
+
         xml.WriteEndElement();
     }
 
@@ -289,7 +300,14 @@ sealed class ManifestRelease
         IsLatest = res;
 
         Files = xml["files"].GetElementsByTagName("file").OfType<XmlElement>()
-            .Select(s => new HashFile(s.GetAttribute("filename").Replace('\\', '/'), s.GetAttribute("hash"), s.GetAttribute("url")))
+            .Select(s => new HashFile(
+                s.GetAttribute("filename").Replace('\\', '/'),
+                s.GetAttribute("hash"),
+                s.GetAttribute("url"),
+                s.GetAttribute("action") switch {
+                    "del" => UpdateAction.Delete,
+                    _ => UpdateAction.None,
+                } ))
             .OrderBy(s => s.Filename)
             .ToList();
     }
@@ -307,4 +325,11 @@ sealed class ManifestRelease
 
         xml.WriteEndElement();
     }
+}
+
+enum UpdateAction
+{
+    None,
+    Update,
+    Delete
 }
