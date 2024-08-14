@@ -30,10 +30,10 @@ set -e
 mkdir -p ./tmp_download
 mkdir -p ./tmp_download/client-$target
 curl -L -o ./tmp_download/client-$target/release.zip https://github.com/ClassicUO/ClassicUO/releases/download/ClassicUO-dev-release/ClassicUO-$target-release.zip
-mkdir -p ./tmp_download/client-$target/output
 
-rm -rfd ../client/$target
-unzip ./tmp_download/client-$target/release.zip -d ../client/$target
+rm -rfd ./client/$target
+mkdir -p ./client/$target
+unzip ./tmp_download/client-$target/release.zip -d ./client/$target
 
 rm -rfd ./tmp_download
 
