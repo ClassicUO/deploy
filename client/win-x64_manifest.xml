@@ -73,6 +73,10 @@
 			<file filename="x64/SDL2.dll" hash="9d3b8235c39c9caf378e605fe5b6b7f8" url="f8/x64/SDL2.dll_9d3b8235c39c9caf378e605fe5b6b7f8" />
 			<file filename="x64/vcruntime140.dll" hash="971dbbe854fc6ab78c095607dfad7b5c" url="5c/x64/vcruntime140.dll_971dbbe854fc6ab78c095607dfad7b5c" />
 			<file filename="x64/zlib.dll" hash="12180b59e1828516e42f801d25e48968" url="68/x64/zlib.dll_12180b59e1828516e42f801d25e48968" />
+			<file filename="FAudio.dll" action="del" />
+			<file filename="FNA3D.dll" action="del" />
+			<file filename="SDL2.dll" action="del" />
+			<file filename="libtheorafile.dll" action="del" />
 		</files>
 	</release>
 	<release name="ClassicUO 1.1.0.0" version="1.1.0.0" latest="True">
