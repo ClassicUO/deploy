@@ -15,10 +15,10 @@ if (!File.Exists(manifestPath))
     Console.WriteLine("manifest '{0}' not found!", manifestPath);
 
 var releasesList = ReadManifest(manifestPath);
-if (releasesList.Any(s => s.Version.Equals(options.Version)))
+if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
 {
     Console.WriteLine("a release with version '{0}' already exists!", options.Version);
-    return;
+    // return;
 }
 
 var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, options.IsLatest);
