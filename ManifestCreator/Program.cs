@@ -17,30 +17,43 @@ if (!File.Exists(manifestPath))
 
 var releasesList = ReadManifest(manifestPath);
 
+// remove all files in "diff" folder that are not listed in releases
 if (options.Cleanup)
 {
     Console.WriteLine("cleanup");
     var diffFolder = new DirectoryInfo(Path.Combine(deployFolder.FullName, "diff"));
-    var diffFiles = diffFolder.GetFiles("*.*", SearchOption.AllDirectories);
-    var releasesFiles = releasesList
+
+    var hashes = releasesList
         .SelectMany(s => s.Files)
-        .GroupBy(k => k.Url)
+        .Where(s => !string.IsNullOrEmpty(s.Hash))
+        .Select(k => k.Hash.ToLowerInvariant())
+        .ToHashSet();
+
+    var diffHashes = diffFolder.GetFiles("*.*", SearchOption.AllDirectories)
+        .GroupBy(s => s.Extension[(s.Extension.IndexOf('_') + 1) ..].ToLowerInvariant())
         .ToDictionary(k => k.Key, v => v.First());
 
-    foreach (var diffFile in diffFiles)
+    foreach ((var hash, var file) in diffHashes)
     {
-        var pp = $"{diffFile.Directory.Name}/{diffFile.Name}";
-        Console.WriteLine("search for cleanup: {0}", pp);
-
-        if (!releasesFiles.ContainsKey(pp))
+        if (!hashes.Contains(hash))
         {
-            Console.WriteLine("obsolete file found: {0}", pp);
-            diffFile.Directory.Delete(true);
+            if (file.Exists)
+            {
+                Console.WriteLine("obsolete file found: {0}", file.FullName);
+                file.Delete();
+            }
         }
     }
-}
 
-return;
+    Console.WriteLine("deleting empty folders");
+    foreach (var dir in diffFolder.GetDirectories().Where(s => s.GetFiles("*.*", SearchOption.AllDirectories).Length == 0))
+    {
+        if (dir.Exists)
+            dir.Delete(true);
+    }
+
+    Console.WriteLine("cleanup done");
+}
 
 if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
 {
