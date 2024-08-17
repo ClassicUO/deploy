@@ -10,11 +10,38 @@ using var md5 = MD5.Create();
 
 var options = ParseArgs(args);
 var manifestPath = $"../client/{options.Target}_manifest.xml";
+var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
 
 if (!File.Exists(manifestPath))
     Console.WriteLine("manifest '{0}' not found!", manifestPath);
 
 var releasesList = ReadManifest(manifestPath);
+
+if (options.Cleanup)
+{
+    Console.WriteLine("cleanup");
+    var diffFolder = new DirectoryInfo(Path.Combine(deployFolder.FullName, "diff"));
+    var diffFiles = diffFolder.GetFiles("*.*", SearchOption.AllDirectories);
+    var releasesFiles = releasesList
+        .SelectMany(s => s.Files)
+        .GroupBy(k => k.Url)
+        .ToDictionary(k => k.Key, v => v.First());
+
+    foreach (var diffFile in diffFiles)
+    {
+        var pp = $"{diffFile.Directory.Name}/{diffFile.Name}";
+        Console.WriteLine("search for cleanup: {0}", pp);
+
+        if (!releasesFiles.ContainsKey(pp))
+        {
+            Console.WriteLine("obsolete file found: {0}", pp);
+            diffFile.Directory.Delete(true);
+        }
+    }
+}
+
+return;
+
 if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
 {
     Console.WriteLine("a release with version '{0}' already exists!", options.Version);
@@ -30,7 +57,6 @@ else if (releasesList.Count <= 0)
 
 releasesList.Add(currentRelease);
 
-var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
 UpdateDiffFolders(currentRelease, deployFolder, options.CuoBinPath);
 WriteManifest(Path.Combine(options.ManifestOutput, $"{options.Target}_manifest.xml"), releasesList);
 
@@ -188,6 +214,7 @@ Options ParseArgs(string[] args)
     var target = string.Empty;
     var latest = true;
     var output = "./";
+    var cleanup = false;
 
     for (int i = 0; i < args.Length; ++i)
     {
@@ -221,10 +248,14 @@ Options ParseArgs(string[] args)
             case "output":
                 output = args[i + 1];
                 break;
+
+            case "clean":
+                cleanup = true;
+                break;
         }
     }
 
-    return new Options(new DirectoryInfo(cuoPath), version.Trim(), name.Trim(), target.Trim(), latest, output);
+    return new Options(new DirectoryInfo(cuoPath), version.Trim(), name.Trim(), target.Trim(), latest, output, cleanup);
 }
 
 sealed record Options
@@ -234,7 +265,8 @@ sealed record Options
     string Name,
     string Target,
     bool IsLatest,
-    string ManifestOutput
+    string ManifestOutput,
+    bool Cleanup
 );
 
 sealed class HashFile
