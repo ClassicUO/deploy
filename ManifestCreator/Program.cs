@@ -9,13 +9,6 @@ using System.Xml;
 using var md5 = MD5.Create();
 
 var options = ParseArgs(args);
-var manifestPath = $"../client/{options.Target}_manifest.xml";
-var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
-
-if (!File.Exists(manifestPath))
-    Console.WriteLine("manifest '{0}' not found!", manifestPath);
-
-var releasesList = ReadManifest(manifestPath);
 
 // remove all files in "diff" folder that are not listed in releases
 if (options.Cleanup)
@@ -31,28 +24,32 @@ if (options.Cleanup)
     }
 
     Console.WriteLine("cleanup");
-    var diffFolder = new DirectoryInfo("../client/diff");
 
     var hashes = manifestList
         .SelectMany(s => s)
         .SelectMany(s => s.Files)
         .Where(s => !string.IsNullOrEmpty(s.Hash))
-        .Select(k => k.Hash.ToLowerInvariant())
-        .ToHashSet();
+        .Select(k => k.Url)
+        .ToList();
 
-    var diffHashes = diffFolder.GetFiles("*.*", SearchOption.AllDirectories)
-        .GroupBy(s => s.Extension[(s.Extension.IndexOf('_') + 1) ..].ToLowerInvariant())
-        .ToDictionary(k => k.Key, v => v.First());
+    var diffFolder = new DirectoryInfo("../client/diff");
+    var diffFiles = diffFolder.GetFiles("*.*", SearchOption.AllDirectories);
 
-    foreach ((var hash, var file) in diffHashes)
+    foreach (var file in diffFiles)
     {
-        if (!hashes.Contains(hash))
+        var found = false;
+        foreach (var url in hashes)
         {
-            if (file.Exists)
+            if (file.FullName.EndsWith(url, StringComparison.InvariantCultureIgnoreCase))
             {
-                Console.WriteLine("obsolete file found: {0}", file.FullName);
-                file.Delete();
+                found = true;
             }
+        }
+
+        if (!found && file.Exists)
+        {
+            Console.WriteLine("obsolete file found: {0}", file.FullName);
+            file.Delete();
         }
     }
 
@@ -64,8 +61,18 @@ if (options.Cleanup)
     }
 
     Console.WriteLine("cleanup done");
+
+    return;
 }
 
+
+var manifestPath = $"../client/{options.Target}_manifest.xml";
+var deployFolder = new DirectoryInfo(Path.GetDirectoryName(manifestPath));
+
+if (!File.Exists(manifestPath))
+    Console.WriteLine("manifest '{0}' not found!", manifestPath);
+
+var releasesList = ReadManifest(manifestPath);
 if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
 {
     Console.WriteLine("a release with version '{0}' already exists!", options.Version);
@@ -232,7 +239,7 @@ string HashFolder(string hash) => hash[^2..];
 
 Options ParseArgs(string[] args)
 {
-    var cuoPath = string.Empty;
+    var cuoPath = "./";
     var version = string.Empty;
     var name = string.Empty;
     var target = string.Empty;

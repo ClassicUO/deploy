@@ -38,5 +38,5 @@ unzip ./tmp_download/client-$target/release.zip -d ./client/$target
 rm -rfd ./tmp_download
 
 cd ManifestCreator
-dotnet run -- --bin ../client/$target --version "$release_name" --name "ClassicUO $release_name" --latest true --target $target --output ../client --clean
+dotnet run -- --bin ../client/$target --version "$release_name" --name "ClassicUO $release_name" --latest true --target $target --output ../client
 cd ..
