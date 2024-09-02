@@ -20,10 +20,21 @@ var releasesList = ReadManifest(manifestPath);
 // remove all files in "diff" folder that are not listed in releases
 if (options.Cleanup)
 {
-    Console.WriteLine("cleanup");
-    var diffFolder = new DirectoryInfo(Path.Combine(deployFolder.FullName, "diff"));
+    var targets = new []{ "linux-x64", "win-x64", "osx-x64" };
+    var manifestList = new List<List<ManifestRelease>>();
 
-    var hashes = releasesList
+    foreach (var target in targets)
+    {
+        var path = $"../client/{target}_manifest.xml";
+        var manifestEntry = ReadManifest(path);
+        manifestList.Add(manifestEntry);
+    }
+
+    Console.WriteLine("cleanup");
+    var diffFolder = new DirectoryInfo("../client/diff");
+
+    var hashes = manifestList
+        .SelectMany(s => s)
         .SelectMany(s => s.Files)
         .Where(s => !string.IsNullOrEmpty(s.Hash))
         .Select(k => k.Hash.ToLowerInvariant())
