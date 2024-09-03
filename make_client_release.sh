@@ -40,3 +40,5 @@ rm -rfd ./tmp_download
 cd ManifestCreator
 dotnet run -- --bin ../client/$target --version "$release_name" --name "ClassicUO $release_name" --latest true --target $target --output ../client
 cd ..
+
+rm -rfd ./client/$target
