@@ -13,7 +13,7 @@ var options = ParseArgs(args);
 // remove all files in "diff" folder that are not listed in releases
 if (options.Cleanup)
 {
-    var targets = new []{ "linux-x64", "win-x64", "osx-x64" };
+    var targets = new[] { "linux-x64", "win-x64", "osx-x64" };
     var manifestList = new List<List<ManifestRelease>>();
 
     foreach (var target in targets)
@@ -79,7 +79,7 @@ if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
     // return;
 }
 
-var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, options.IsLatest);
+var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, options.IsLatest, options.IsBeta);
 
 if (currentRelease.IsLatest)
     releasesList.ForEach(s => s.IsLatest = false);
@@ -123,12 +123,12 @@ List<ManifestRelease> ReadManifest(string manifestPath)
 
     Console.WriteLine("releases found: {0}", list.Count);
     foreach (var release in list)
-        Console.WriteLine("  {0} - {1} {2}", release.Name, release.Version, release.IsLatest ? "[latest]" : "");
+        Console.WriteLine("  {0} - {1} {2}{3}", release.Name, release.Version, release.IsLatest ? "[latest]" : "", release.IsBeta ? "[beta]" : "");
 
     return list;
 }
 
-ManifestRelease CreateReleaseFromFolder(DirectoryInfo cuoOutputPath, string version, string name, bool isLatest)
+ManifestRelease CreateReleaseFromFolder(DirectoryInfo cuoOutputPath, string version, string name, bool isLatest, bool isBeta)
 {
     Console.WriteLine("creating release from {0}", cuoOutputPath);
 
@@ -154,7 +154,7 @@ ManifestRelease CreateReleaseFromFolder(DirectoryInfo cuoOutputPath, string vers
 
     Console.WriteLine("done");
 
-    return new ManifestRelease(version, name, fileList, isLatest);
+    return new ManifestRelease(version, name, fileList, isLatest, isBeta);
 }
 
 void WriteManifest(string manifestName, List<ManifestRelease> releases)
@@ -244,6 +244,7 @@ Options ParseArgs(string[] args)
     var name = string.Empty;
     var target = string.Empty;
     var latest = true;
+    var beta = false;
     var output = "./";
     var cleanup = false;
 
@@ -276,6 +277,10 @@ Options ParseArgs(string[] args)
                 latest = bool.Parse(args[i + 1]);
                 break;
 
+            case "beta":
+                beta = bool.Parse(args[i + 1]);
+                break;
+
             case "output":
                 output = args[i + 1];
                 break;
@@ -286,7 +291,7 @@ Options ParseArgs(string[] args)
         }
     }
 
-    return new Options(new DirectoryInfo(cuoPath), version.Trim(), name.Trim(), target.Trim(), latest, output, cleanup);
+    return new Options(new DirectoryInfo(cuoPath), version.Trim(), name.Trim(), target.Trim(), latest, beta, output, cleanup);
 }
 
 sealed record Options
@@ -296,6 +301,7 @@ sealed record Options
     string Name,
     string Target,
     bool IsLatest,
+    bool IsBeta,
     string ManifestOutput,
     bool Cleanup
 );
@@ -346,13 +352,15 @@ sealed class ManifestRelease
     public string Name { get; }
     public List<HashFile> Files { get; }
     public bool IsLatest { get; set; }
+    public bool IsBeta { get; set; }
 
-    public ManifestRelease(string version ,string name, List<HashFile> files, bool isLatest)
+    public ManifestRelease(string version, string name, List<HashFile> files, bool isLatest, bool isBeta)
     {
         Version = version;
         Name = name;
         Files = files;
         IsLatest = isLatest;
+        IsBeta = isBeta;
     }
 
     public ManifestRelease(XmlElement xml)
@@ -361,16 +369,19 @@ sealed class ManifestRelease
         Version = xml.GetAttribute("version");
         bool.TryParse(xml.GetAttribute("latest"), out var res);
         IsLatest = res;
+        bool.TryParse(xml.GetAttribute("beta"), out var betaRes);
+        IsBeta = betaRes;
 
         Files = xml["files"].GetElementsByTagName("file").OfType<XmlElement>()
             .Select(s => new HashFile(
                 s.GetAttribute("filename").Replace('\\', '/'),
                 s.GetAttribute("hash"),
                 s.GetAttribute("url"),
-                s.GetAttribute("action") switch {
+                s.GetAttribute("action") switch
+                {
                     "del" => UpdateAction.Delete,
                     _ => UpdateAction.None,
-                } ))
+                }))
             .OrderBy(s => s.Filename)
             .ToList();
     }
@@ -381,6 +392,7 @@ sealed class ManifestRelease
         xml.WriteAttributeString("name", Name);
         xml.WriteAttributeString("version", Version);
         xml.WriteAttributeString("latest", IsLatest.ToString());
+        xml.WriteAttributeString("beta", IsBeta.ToString());
 
         xml.WriteStartElement("files");
         Files.ForEach(s => s.Save(xml));

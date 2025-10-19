@@ -2,11 +2,13 @@
 
 target="$1"
 release_name="$2"
+beta="${3:-false}"
 
 if [ -z "$target" ]; then
   echo "Error: No target specified."
-  echo "Usage: $0 <target>"
+  echo "Usage: $0 <target> <release_name> [beta]"
   echo "Valid targets: linux-x64, win-x64, osx-x64"
+  echo "Beta: true or false (default: false)"
   exit 1
 fi
 
@@ -38,7 +40,7 @@ unzip ./tmp_download/client-$target/release.zip -d ./client/$target
 rm -rfd ./tmp_download
 
 cd ManifestCreator
-dotnet run -- --bin ../client/$target --version "$release_name" --name "ClassicUO $release_name" --latest true --target $target --output ../client
+dotnet run -- --bin ../client/$target --version "$release_name" --name "ClassicUO $release_name" --latest true --beta $beta --target $target --output ../client
 cd ..
 
 rm -rfd ./client/$target
