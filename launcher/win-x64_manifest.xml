@@ -2,7 +2,7 @@
 <releases>
 	<release name="ClassicUOLauncher-win-x64-release.zip" version="Release">
 		<files>
-			<file filename="ClassicUOLauncher.exe" hash="6a78d035b03094b02f718382365a987f" />
+			<file filename="ClassicUOLauncher.exe" hash="f9d796da0dfff19840cdf5ee65640c8a" />
 		</files>
 	</release>
 </releases>
