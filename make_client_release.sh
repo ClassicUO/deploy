@@ -3,12 +3,14 @@
 target="$1"
 release_name="$2"
 beta="${3:-false}"
+tag="${4:-ClassicUO-dev-release}" 
 
 if [ -z "$target" ]; then
   echo "Error: No target specified."
-  echo "Usage: $0 <target> <release_name> [beta]"
+  echo "Usage: $0 <target> <release_name> [beta] [tag]"
   echo "Valid targets: linux-x64, win-x64, osx-x64"
   echo "Beta: true or false (default: false)"
+  echo "Tag: GitHub release tag (default: ClassicUO-dev-release)"
   exit 1
 fi
 
@@ -21,17 +23,22 @@ fi
 
 if [ -z "$release_name" ]; then
   echo "Error: No release name specified."
+  echo "Usage: $0 <target> <release_name> [beta] [tag]"
   exit 1
 fi
 
-# If the target is valid, continue with the script
 echo "Target is valid: $target"
+echo "Using tag: $tag"
+echo "Beta: $beta"
 
 set -e
 
 mkdir -p ./tmp_download
 mkdir -p ./tmp_download/client-$target
-curl -L -o ./tmp_download/client-$target/release.zip https://github.com/ClassicUO/ClassicUO/releases/download/ClassicUO-dev-release/ClassicUO-$target-release.zip
+
+# UPDATED: tag injected into the download URL
+curl -L -o ./tmp_download/client-$target/release.zip \
+  "https://github.com/ClassicUO/ClassicUO/releases/download/${tag}/ClassicUO-${target}-release.zip"
 
 rm -rfd ./client/$target
 mkdir -p ./client/$target
