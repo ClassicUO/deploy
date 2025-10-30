@@ -82,9 +82,33 @@ if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
 var currentRelease = CreateReleaseFromFolder(options.CuoBinPath, options.Version, options.Name, options.IsLatest, options.IsBeta);
 
 if (currentRelease.IsLatest)
-    releasesList.ForEach(s => s.IsLatest = false);
+{
+    // If the new release is marked as latest, unmark only releases of the same type (beta or non-beta)
+    releasesList.ForEach(s =>
+    {
+        if (s.IsBeta == currentRelease.IsBeta)
+            s.IsLatest = false;
+    });
+}
 else if (releasesList.Count <= 0)
+{
     currentRelease.IsLatest = true;
+}
+else if (!currentRelease.IsLatest && releasesList.Any(s => s.IsBeta == currentRelease.IsBeta))
+{
+    // If the new release is not marked as latest, but there are other releases of the same type,
+    // ensure at least one release of the same type is marked as latest
+    if (!releasesList.Any(s => s.IsBeta == currentRelease.IsBeta && s.IsLatest))
+    {
+        var latestOfType = releasesList
+            .Where(s => s.IsBeta == currentRelease.IsBeta)
+            .OrderByDescending(s => s.Version)
+            .FirstOrDefault();
+
+        if (latestOfType != null)
+            latestOfType.IsLatest = true;
+    }
+}
 
 releasesList.Add(currentRelease);
 
