@@ -3,14 +3,14 @@
 target="$1"
 release_name="$2"
 beta="${3:-false}"
-tag="${4:-ClassicUO-dev-release}" 
+tag="${4:-ClassicUO-main-release}" 
 
 if [ -z "$target" ]; then
   echo "Error: No target specified."
   echo "Usage: $0 <target> <release_name> [beta] [tag]"
   echo "Valid targets: linux-x64, win-x64, osx-x64"
   echo "Beta: true or false (default: false)"
-  echo "Tag: GitHub release tag (default: ClassicUO-dev-release)"
+  echo "Tag: GitHub release tag (default: ClassicUO-main-release)"
   exit 1
 fi
 

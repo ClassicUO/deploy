@@ -2,7 +2,7 @@ set -e
 
 release_name="$1"
 beta="${2:-false}"
-tag="${3:-ClassicUO-dev-release}" 
+tag="${3:-ClassicUO-main-release}" 
 
 if [ -z "$release_name" ]; then
   echo "Error: No release name specified."
