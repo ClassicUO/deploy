@@ -73,9 +73,9 @@ if (!File.Exists(manifestPath))
     Console.WriteLine("manifest '{0}' not found!", manifestPath);
 
 var releasesList = ReadManifest(manifestPath);
-if (releasesList.RemoveAll(s => s.Version.Equals(options.Version)) > 0)
+if (releasesList.RemoveAll(s => s.Version.Equals(options.Version) && s.IsBeta == options.IsBeta) > 0)
 {
-    Console.WriteLine("a release with version '{0}' already exists!", options.Version);
+    Console.WriteLine("a release with version '{0}' (beta: {1}) already exists!", options.Version, options.IsBeta);
     // return;
 }
 
