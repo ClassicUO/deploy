@@ -191,23 +191,23 @@
 		<files>
 			<file filename="Accessibility.dll" hash="6461bbbe70187b59bcde8c9c78001aa8" url="a8/Accessibility.dll_6461bbbe70187b59bcde8c9c78001aa8" />
 			<file filename="ClassicUO" hash="f32805e2bad19ad28544c9bebd4ede31" url="31/ClassicUO_f32805e2bad19ad28544c9bebd4ede31" />
-			<file filename="ClassicUO.Assets.pdb" hash="2606f68036b36d600d5bb280aab1c9ec" url="ec/ClassicUO.Assets.pdb_2606f68036b36d600d5bb280aab1c9ec" />
+			<file filename="ClassicUO.Assets.pdb" hash="a1cf1099803c76fa1886892ebb6d2400" url="00/ClassicUO.Assets.pdb_a1cf1099803c76fa1886892ebb6d2400" />
 			<file filename="ClassicUO.bin.osx" hash="4650aa7713a2e9111ad130ebf0230fc7" url="c7/ClassicUO.bin.osx_4650aa7713a2e9111ad130ebf0230fc7" />
 			<file filename="ClassicUO.bin.x86_64" hash="335031523cc4b296287afdc4b54d81ce" url="ce/ClassicUO.bin.x86_64_335031523cc4b296287afdc4b54d81ce" />
 			<file filename="ClassicUO.bin.x86_64.debug" hash="e4f288b5de6f6893a08817c95604a6af" url="af/ClassicUO.bin.x86_64.debug_e4f288b5de6f6893a08817c95604a6af" />
-			<file filename="ClassicUO.exe" hash="4aedefca8cdba603e51a0ad2733b17a0" url="a0/ClassicUO.exe_4aedefca8cdba603e51a0ad2733b17a0" />
+			<file filename="ClassicUO.exe" hash="d27a9b38bf050b6ea2b01640bd6f2238" url="38/ClassicUO.exe_d27a9b38bf050b6ea2b01640bd6f2238" />
 			<file filename="ClassicUO.exe.config" hash="eea6aa9b618383bcc985b659393114f4" url="f4/ClassicUO.exe.config_eea6aa9b618383bcc985b659393114f4" />
-			<file filename="ClassicUO.IO.pdb" hash="59955a891e51d497fd5648abb0c03054" url="54/ClassicUO.IO.pdb_59955a891e51d497fd5648abb0c03054" />
-			<file filename="ClassicUO.pdb" hash="0c7eeb93e2eb8ace2ecf419b29be0b28" url="28/ClassicUO.pdb_0c7eeb93e2eb8ace2ecf419b29be0b28" />
-			<file filename="ClassicUO.Renderer.pdb" hash="0911a34828cb01c02b434d8c6e28fc88" url="88/ClassicUO.Renderer.pdb_0911a34828cb01c02b434d8c6e28fc88" />
-			<file filename="ClassicUO.Utility.pdb" hash="a05f124b6c43698842c923f046bfd164" url="64/ClassicUO.Utility.pdb_a05f124b6c43698842c923f046bfd164" />
-			<file filename="cuo.dylib" hash="2ca602f62469d18b8bfa66a0c7e1b8fb" url="fb/cuo.dylib_2ca602f62469d18b8bfa66a0c7e1b8fb" />
+			<file filename="ClassicUO.IO.pdb" hash="29b020ca14551c49bf9652a8c34cf1cd" url="cd/ClassicUO.IO.pdb_29b020ca14551c49bf9652a8c34cf1cd" />
+			<file filename="ClassicUO.pdb" hash="bd4251a7bf57b8d00a2ac6c95b5fc56e" url="6e/ClassicUO.pdb_bd4251a7bf57b8d00a2ac6c95b5fc56e" />
+			<file filename="ClassicUO.Renderer.pdb" hash="4371917ec294f1e8af804cc592f7adb6" url="b6/ClassicUO.Renderer.pdb_4371917ec294f1e8af804cc592f7adb6" />
+			<file filename="ClassicUO.Utility.pdb" hash="55d969c0182fca7737db7085cb449b37" url="37/ClassicUO.Utility.pdb_55d969c0182fca7737db7085cb449b37" />
+			<file filename="cuo.dylib" hash="e2468229090ae1b3b03286eb8cd73f20" url="20/cuo.dylib_e2468229090ae1b3b03286eb8cd73f20" />
 			<file filename="cuo.dylib.dSYM/Contents/Info.plist" hash="53d7520844665f5a42dba359f9683f7b" url="7b/cuo.dylib.dSYM/Contents/Info.plist_53d7520844665f5a42dba359f9683f7b" />
-			<file filename="cuo.dylib.dSYM/Contents/Resources/DWARF/cuo.dylib" hash="6714ccab8c6add8f9c39432a13bf6601" url="01/cuo.dylib.dSYM/Contents/Resources/DWARF/cuo.dylib_6714ccab8c6add8f9c39432a13bf6601" />
-			<file filename="cuo.dylib.dSYM/Contents/Resources/Relocations/x86_64/cuo.dylib.yml" hash="617c932d1abe64c897951504c9ee02c8" url="c8/cuo.dylib.dSYM/Contents/Resources/Relocations/x86_64/cuo.dylib.yml_617c932d1abe64c897951504c9ee02c8" />
+			<file filename="cuo.dylib.dSYM/Contents/Resources/DWARF/cuo.dylib" hash="5ef4fa4294d91212ec90e8469cc349da" url="da/cuo.dylib.dSYM/Contents/Resources/DWARF/cuo.dylib_5ef4fa4294d91212ec90e8469cc349da" />
+			<file filename="cuo.dylib.dSYM/Contents/Resources/Relocations/x86_64/cuo.dylib.yml" hash="3b0d1757a1dd77ad528336e6bbe67bc7" url="c7/cuo.dylib.dSYM/Contents/Resources/Relocations/x86_64/cuo.dylib.yml_3b0d1757a1dd77ad528336e6bbe67bc7" />
 			<file filename="cuoapi.dll" hash="2fbd9d072eefed8adc2f24e89ff71929" url="29/cuoapi.dll_2fbd9d072eefed8adc2f24e89ff71929" />
 			<file filename="FNA.dll.config" hash="b0337d0311d216e4ed890d536be0370f" url="0f/FNA.dll.config_b0337d0311d216e4ed890d536be0370f" />
-			<file filename="FNA.pdb" hash="ecb65c009d1f8b6210a237f1e9c674fe" url="fe/FNA.pdb_ecb65c009d1f8b6210a237f1e9c674fe" />
+			<file filename="FNA.pdb" hash="6090049dcbf2f3227cbd0274b9036bde" url="de/FNA.pdb_6090049dcbf2f3227cbd0274b9036bde" />
 			<file filename="libFAudio.0.dylib" hash="6d6e26fdcd98f0fd64f3db2cd752d63d" url="3d/libFAudio.0.dylib_6d6e26fdcd98f0fd64f3db2cd752d63d" />
 			<file filename="libFNA3D.0.dylib" hash="c71f9c88e5c6a6e1da1b28a5ddaa7641" url="41/libFNA3D.0.dylib_c71f9c88e5c6a6e1da1b28a5ddaa7641" />
 			<file filename="libMoltenVK.dylib" hash="0e2d771869a2432322018c0ddf860ba0" url="a0/libMoltenVK.dylib_0e2d771869a2432322018c0ddf860ba0" />
@@ -219,7 +219,7 @@
 			<file filename="Mono.Security.dll" hash="364bc0b13b27a34c5a664c717270b43e" url="3e/Mono.Security.dll_364bc0b13b27a34c5a664c717270b43e" />
 			<file filename="monoconfig" hash="e550c4528576d34f86d586777a2747b4" url="b4/monoconfig_e550c4528576d34f86d586777a2747b4" />
 			<file filename="monomachineconfig" hash="25ff1ec49e3ac9285bd943cf036bd813" url="13/monomachineconfig_25ff1ec49e3ac9285bd943cf036bd813" />
-			<file filename="MP3Sharp.pdb" hash="ddf34bb9e46dae4335b84aa63eb23212" url="12/MP3Sharp.pdb_ddf34bb9e46dae4335b84aa63eb23212" />
+			<file filename="MP3Sharp.pdb" hash="a1bd35f9dd0c07daa4273bfd87d38942" url="42/MP3Sharp.pdb_a1bd35f9dd0c07daa4273bfd87d38942" />
 			<file filename="mscorlib.dll" hash="bd71e8b8f4f11891e92265183857f6ec" url="ec/mscorlib.dll_bd71e8b8f4f11891e92265183857f6ec" />
 			<file filename="System.Buffers.dll" hash="ecdfe8ede869d2ccc6bf99981ea96400" url="00/System.Buffers.dll_ecdfe8ede869d2ccc6bf99981ea96400" />
 			<file filename="System.Configuration.dll" hash="0e9731d064d57c2e1bb2a49814afb526" url="26/System.Configuration.dll_0e9731d064d57c2e1bb2a49814afb526" />
