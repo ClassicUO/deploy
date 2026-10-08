@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <releases>
-	<release name="ClassicUOLauncher-linux-x64-release.zip" version="Release">
+	<release name="ClassicUOLauncher-linux-x64-release.zip" version="release">
 		<files>
-			<file filename="ClassicUOLauncher" hash="905560bacb6a3a2854fb388f7a1084cb" />
+			<file filename="ClassicUOLauncher" hash="6b68c3d2788393fcf7ac7734a14d02a5" />
 		</files>
 	</release>
 </releases>
