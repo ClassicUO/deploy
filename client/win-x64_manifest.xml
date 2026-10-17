@@ -159,8 +159,8 @@
 	</release>
 	<release name="ClassicUO 2.0.0.0" version="2.0.0.0" latest="True" beta="True">
 		<files>
-			<file filename="ClassicUO.exe" hash="d16ca27110124618120ab4d88230b9cf" url="cf/ClassicUO.exe_d16ca27110124618120ab4d88230b9cf" />
-			<file filename="cuo.dll" hash="35aa60525147ec024e8ef69fcd6f9f4d" url="4d/cuo.dll_35aa60525147ec024e8ef69fcd6f9f4d" />
+			<file filename="ClassicUO.exe" hash="cae5f032cc86def21c97829fff6e4be3" url="e3/ClassicUO.exe_cae5f032cc86def21c97829fff6e4be3" />
+			<file filename="cuo.dll" hash="655cb4bd0e2276de34ac329a8f6d7a7d" url="7d/cuo.dll_655cb4bd0e2276de34ac329a8f6d7a7d" />
 		</files>
 	</release>
 </releases>
