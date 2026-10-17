@@ -105,7 +105,7 @@
 			<file filename="zlib.dll" hash="12180b59e1828516e42f801d25e48968" url="68/zlib.dll_12180b59e1828516e42f801d25e48968" />
 		</files>
 	</release>
-	<release name="ClassicUO 1.1.1.0" version="1.1.1.0" latest="True" beta="True">
+	<release name="ClassicUO 1.1.1.0" version="1.1.1.0" latest="False" beta="True">
 		<files>
 			<file filename="ClassicUO.Assets.pdb" hash="0030004fba231635c73e50ca778152cb" url="cb/ClassicUO.Assets.pdb_0030004fba231635c73e50ca778152cb" />
 			<file filename="ClassicUO.exe" hash="2b8c6df22effdf96d6a8a23a1cead783" url="83/ClassicUO.exe_2b8c6df22effdf96d6a8a23a1cead783" />
@@ -155,6 +155,12 @@
 			<file filename="System.Numerics.Vectors.dll" hash="aaa2cbf14e06e9d3586d8a4ed455db33" url="33/System.Numerics.Vectors.dll_aaa2cbf14e06e9d3586d8a4ed455db33" />
 			<file filename="System.Runtime.CompilerServices.Unsafe.dll" hash="c610e828b54001574d86dd2ed730e392" url="92/System.Runtime.CompilerServices.Unsafe.dll_c610e828b54001574d86dd2ed730e392" />
 			<file filename="zlib.dll" hash="12180b59e1828516e42f801d25e48968" url="68/zlib.dll_12180b59e1828516e42f801d25e48968" />
+		</files>
+	</release>
+	<release name="ClassicUO 2.0.0.0" version="2.0.0.0" latest="True" beta="True">
+		<files>
+			<file filename="ClassicUO.exe" hash="d16ca27110124618120ab4d88230b9cf" url="cf/ClassicUO.exe_d16ca27110124618120ab4d88230b9cf" />
+			<file filename="cuo.dll" hash="35aa60525147ec024e8ef69fcd6f9f4d" url="4d/cuo.dll_35aa60525147ec024e8ef69fcd6f9f4d" />
 		</files>
 	</release>
 </releases>
