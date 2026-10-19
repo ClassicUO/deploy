@@ -160,7 +160,13 @@
 	<release name="ClassicUO 2.0.0.0" version="2.0.0.0" latest="True" beta="True">
 		<files>
 			<file filename="ClassicUO.exe" hash="25f138516f4df28522a6902c5f5a0bdc" url="dc/ClassicUO.exe_25f138516f4df28522a6902c5f5a0bdc" />
-			<file filename="cuo.dll" hash="0f1312dfde38b273a314f2e3c8df828e" url="8e/cuo.dll_0f1312dfde38b273a314f2e3c8df828e" />
+			<file filename="ClassicUO.exe.config" hash="85a933acdcbe62992f8c0032a3d3d2ce" url="ce/ClassicUO.exe.config_85a933acdcbe62992f8c0032a3d3d2ce" />
+			<file filename="cuo.dll" hash="46d17fa5230e0405684c7195838bd412" url="12/cuo.dll_46d17fa5230e0405684c7195838bd412" />
+			<file filename="cuoapi.dll" hash="2fbd9d072eefed8adc2f24e89ff71929" url="29/cuoapi.dll_2fbd9d072eefed8adc2f24e89ff71929" />
+			<file filename="System.Buffers.dll" hash="ecdfe8ede869d2ccc6bf99981ea96400" url="00/System.Buffers.dll_ecdfe8ede869d2ccc6bf99981ea96400" />
+			<file filename="System.Memory.dll" hash="f09441a1ee47fb3e6571a3a448e05baf" url="af/System.Memory.dll_f09441a1ee47fb3e6571a3a448e05baf" />
+			<file filename="System.Numerics.Vectors.dll" hash="aaa2cbf14e06e9d3586d8a4ed455db33" url="33/System.Numerics.Vectors.dll_aaa2cbf14e06e9d3586d8a4ed455db33" />
+			<file filename="System.Runtime.CompilerServices.Unsafe.dll" hash="c610e828b54001574d86dd2ed730e392" url="92/System.Runtime.CompilerServices.Unsafe.dll_c610e828b54001574d86dd2ed730e392" />
 		</files>
 	</release>
 </releases>
