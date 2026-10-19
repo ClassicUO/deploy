@@ -229,7 +229,7 @@
 	<release name="ClassicUO 2.0.0.0" version="2.0.0.0" latest="True" beta="True">
 		<files>
 			<file filename="ClassicUO" hash="f32805e2bad19ad28544c9bebd4ede31" url="31/ClassicUO_f32805e2bad19ad28544c9bebd4ede31" />
-			<file filename="cuo.so" hash="78d354aa879b7593936de44b770a55fe" url="fe/cuo.so_78d354aa879b7593936de44b770a55fe" />
+			<file filename="cuo.so" hash="8c305c600857c4a202cd280c9b03f444" url="44/cuo.so_8c305c600857c4a202cd280c9b03f444" />
 		</files>
 	</release>
 </releases>
