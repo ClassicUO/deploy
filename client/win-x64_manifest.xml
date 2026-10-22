@@ -161,7 +161,7 @@
 		<files>
 			<file filename="ClassicUO.exe" hash="1d1718443b34d301b7a89f4081e2a5ee" url="ee/ClassicUO.exe_1d1718443b34d301b7a89f4081e2a5ee" />
 			<file filename="ClassicUO.exe.config" hash="85a933acdcbe62992f8c0032a3d3d2ce" url="ce/ClassicUO.exe.config_85a933acdcbe62992f8c0032a3d3d2ce" />
-			<file filename="cuo.dll" hash="46c8453b0ac3381afac46e8e5476b952" url="52/cuo.dll_46c8453b0ac3381afac46e8e5476b952" />
+			<file filename="cuo.dll" hash="b6638e55868b82417c9e21ae3ca39f18" url="18/cuo.dll_b6638e55868b82417c9e21ae3ca39f18" />
 			<file filename="cuoapi.dll" hash="2fbd9d072eefed8adc2f24e89ff71929" url="29/cuoapi.dll_2fbd9d072eefed8adc2f24e89ff71929" />
 			<file filename="System.Buffers.dll" hash="ecdfe8ede869d2ccc6bf99981ea96400" url="00/System.Buffers.dll_ecdfe8ede869d2ccc6bf99981ea96400" />
 			<file filename="System.Memory.dll" hash="f09441a1ee47fb3e6571a3a448e05baf" url="af/System.Memory.dll_f09441a1ee47fb3e6571a3a448e05baf" />
