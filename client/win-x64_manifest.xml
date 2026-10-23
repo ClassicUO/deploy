@@ -159,9 +159,9 @@
 	</release>
 	<release name="ClassicUO 2.0.0.0" version="2.0.0.0" latest="True" beta="True">
 		<files>
-			<file filename="ClassicUO.exe" hash="1357b357bb129a1aa1bfe1b9fbecb22d" url="2d/ClassicUO.exe_1357b357bb129a1aa1bfe1b9fbecb22d" />
+			<file filename="ClassicUO.exe" hash="0a08dcab3046a670f4921e1a43522ddb" url="db/ClassicUO.exe_0a08dcab3046a670f4921e1a43522ddb" />
 			<file filename="ClassicUO.exe.config" hash="85a933acdcbe62992f8c0032a3d3d2ce" url="ce/ClassicUO.exe.config_85a933acdcbe62992f8c0032a3d3d2ce" />
-			<file filename="cuo.dll" hash="f554de719de76f4ea62ada5c124a6c3b" url="3b/cuo.dll_f554de719de76f4ea62ada5c124a6c3b" />
+			<file filename="cuo.dll" hash="6465e1e7b4765d0c606cdad21242c9cd" url="cd/cuo.dll_6465e1e7b4765d0c606cdad21242c9cd" />
 			<file filename="cuoapi.dll" hash="2fbd9d072eefed8adc2f24e89ff71929" url="29/cuoapi.dll_2fbd9d072eefed8adc2f24e89ff71929" />
 			<file filename="System.Buffers.dll" hash="ecdfe8ede869d2ccc6bf99981ea96400" url="00/System.Buffers.dll_ecdfe8ede869d2ccc6bf99981ea96400" />
 			<file filename="System.Memory.dll" hash="f09441a1ee47fb3e6571a3a448e05baf" url="af/System.Memory.dll_f09441a1ee47fb3e6571a3a448e05baf" />
