@@ -40,7 +40,8 @@ if (options.Cleanup)
         var found = false;
         foreach (var url in hashes)
         {
-            if (file.FullName.EndsWith(url, StringComparison.InvariantCultureIgnoreCase))
+            // urls use '/', FullName uses '\' on Windows
+            if (file.FullName.Replace('\\', '/').EndsWith(url, StringComparison.InvariantCultureIgnoreCase))
             {
                 found = true;
             }
